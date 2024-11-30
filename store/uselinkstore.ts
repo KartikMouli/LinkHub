@@ -1,57 +1,103 @@
 import { create } from 'zustand';
-import { Link } from '../types/link';
-import { createLink, deleteLink, fetchLinks, incrementViews } from '@/lib/links';
-
+import { GeoInfo, Link } from '../types/link';
 
 interface LinksStore {
     links: Link[];
     isLoading: boolean;
     error: string | null;
-    fetchLinks: () => Promise<void>;
-    addLink: (title: string, url: string) => Promise<void>;
-    removeLink: (id: string) => Promise<void>;
-    incrementViews: (id: string) => Promise<void>;
+    geoInfo: GeoInfo | null;
+    visitTracked: boolean;
+    setGeoInfo: (geoInfo: GeoInfo) => void;
+    setVisitTracked: (status: boolean) => void;
+    fetchGeoInfo: () => Promise<void>;
+    trackVisit: () => Promise<void>;
+    handleLinkClick: (linkId: string) => Promise<void>;
 }
 
 export const useLinksStore = create<LinksStore>((set, get) => ({
     links: [],
     isLoading: false,
     error: null,
-    fetchLinks: async () => {
-        set({ isLoading: true, error: null });
+    geoInfo: null,
+    visitTracked: false,
+    setGeoInfo: (geoInfo) => set({ geoInfo }),
+    setVisitTracked: (status) => set({ visitTracked: status }),
+
+    fetchGeoInfo: async () => {
         try {
-            const links = await fetchLinks();
-            set({ links, isLoading: false });
-        } catch (error) {
-            set({ error: 'Failed to fetch links', isLoading: false });
-        }
-    },
-    addLink: async (title: string, url: string) => {
-        try {
-            const newLink = await createLink(title, url);
-            set({ links: [newLink, ...get().links] });
-        } catch (error) {
-            set({ error: 'Failed to add link' });
-        }
-    },
-    removeLink: async (id: string) => {
-        try {
-            await deleteLink(id);
-            set({ links: get().links.filter((link) => link.id !== id) });
-        } catch (error) {
-            set({ error: 'Failed to remove link' });
-        }
-    },
-    incrementViews: async (id: string) => {
-        try {
-            const updatedLink = await incrementViews(id);
+            const response = await fetch("/api/geolocation");
+            const data = await response.json();
             set({
-                links: get().links.map((link) =>
-                    link.id === id ? updatedLink : link
-                ),
+                geoInfo: {
+                    country: data.country,
+                    city: data.city,
+                    region: data.region,
+                },
             });
         } catch (error) {
-            set({ error: 'Failed to increment views' });
+            console.error("Error fetching geo info:", error);
         }
     },
+
+    trackVisit: async () => {
+        const { geoInfo, visitTracked } = get();
+        if (!geoInfo || visitTracked) return;
+
+        const referrer = document.referrer;
+        let source = "direct";
+
+        if (referrer) {
+            try {
+                const url = new URL(referrer);
+                source = url.hostname;
+            } catch (error) {
+                console.error("Invalid referrer URL:", error);
+                source = referrer;
+            }
+        }
+
+        try {
+            const response = await fetch("/api/analytics", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    event_type: "visit",
+                    source,
+                    ...geoInfo,
+                }),
+            });
+
+            if (!response.ok) {
+                throw new Error("Failed to track visit");
+            }
+
+            set({ visitTracked: true });
+        } catch (error) {
+            console.error("Error tracking visit:", error);
+        }
+    },
+
+    handleLinkClick: async (linkId: string) => {
+        const { geoInfo } = get();
+
+        try {
+            const payload = {
+                event_type: "click",
+                link_id: linkId,
+                ...(geoInfo || {}),
+            };
+
+            const response = await fetch("/api/analytics", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload),
+            });
+
+            if (!response.ok) {
+                throw new Error("Failed to track click");
+            }
+        } catch (error) {
+            console.error("Error tracking click:", error);
+        }
+    }
 }));
