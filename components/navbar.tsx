@@ -1,6 +1,6 @@
 "use client";
 
-import { buttonVariants } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import {
     Tooltip,
@@ -16,6 +16,7 @@ import { socialLinks } from "@/constants/social-links";
 // Importing icons
 import { Github, Instagram, Linkedin, Mail } from "lucide-react";
 import { FaXTwitter, FaWhatsapp } from "react-icons/fa6";
+import { useLinksStore } from "@/store/uselinkstore";
 
 // Mapping platform names to their respective icons
 const SocialIcon: Record<string, React.ElementType> = {
@@ -29,6 +30,12 @@ const SocialIcon: Record<string, React.ElementType> = {
 
 export default function Navbar() {
     const socials = socialLinks;
+    const handleLinkClick = useLinksStore(state => state.handleLinkClick)
+
+    const onLinkClick = async (url: string) => {
+        window.open(url, "_blank");
+        await handleLinkClick(url ?? "undefined link");
+    };
 
     return (
         <div className="pointer-events-none fixed inset-x-0 bottom-0 z-30 mx-auto mb-4 flex origin-bottom h-full max-h-14">
@@ -45,18 +52,15 @@ export default function Navbar() {
                         <DockIcon key={platform}>
                             <Tooltip>
                                 <TooltipTrigger asChild>
-                                    <Link
-                                        href={url}
-                                        className={cn(
-                                            buttonVariants({
-                                                variant: "ghost",
-                                                size: "icon",
-                                            }),
-                                            "size-12"
-                                        )}
+                                    <Button
+                                        variant={"ghost"}
+                                        size={"icon"}
+
+                                        className="size-12"
+                                        onClick={() => onLinkClick(url)}
                                     >
                                         <Icon className="size-4 transition-all duration-300 text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-500" />
-                                    </Link>
+                                    </Button>
                                 </TooltipTrigger>
                                 <TooltipContent>
                                     <p>{platform}</p>

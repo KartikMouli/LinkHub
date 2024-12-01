@@ -72,8 +72,9 @@ export default function Home() {
         ))}
       </motion.div>
 
-
+      {/* Socials Section */}
       <Navbar />
+
 
 
     </div>
