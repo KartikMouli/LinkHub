@@ -9,12 +9,7 @@ export interface GeoInfo {
   region: string;
 }
 
-export interface LinkItem {
-  type: string;
-  title: string;
-  url?: string,
 
-}
 
 export interface AnalyticsData {
   date_range: { start_date: string; end_date: string };

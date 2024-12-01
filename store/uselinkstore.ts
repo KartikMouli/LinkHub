@@ -1,8 +1,7 @@
 import { create } from 'zustand';
-import { GeoInfo, Link } from '../types/link';
+import { GeoInfo } from '../types/link';
 
 interface LinksStore {
-    links: Link[];
     isLoading: boolean;
     error: string | null;
     geoInfo: GeoInfo | null;
@@ -15,7 +14,7 @@ interface LinksStore {
 }
 
 export const useLinksStore = create<LinksStore>((set, get) => ({
-    links: [],
+    
     isLoading: false,
     error: null,
     geoInfo: null,

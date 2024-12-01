@@ -33,7 +33,7 @@ export default function LoginPage() {
         <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-900 dark:to-blue-900 px-4 sm:px-6 lg:px-8 transition-colors duration-300">
             <div className="max-w-md w-full space-y-8 bg-gradient-to-br from-white to-gray-100 dark:from-gray-800 dark:to-gray-700 p-6 sm:p-8 rounded-xl shadow-xl">
                 <h2 className="text-center text-2xl font-extrabold text-gray-900 dark:text-white">
-                    Sign in to your dashboard
+                    Sign in to dashboard
                 </h2>
                 <form className="mt-8 space-y-6" onSubmit={handleLogin}>
                     <div className="space-y-4">

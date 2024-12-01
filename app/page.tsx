@@ -1,47 +1,74 @@
-"use client"
+"use client";
 
 import { motion } from "framer-motion";
 import { LinkIcon } from "lucide-react";
-import { LinkCard } from "./components/link-card";
-import { ThemeToggle } from "./components/theme-toggle";
-import { heading, name, socialLinks } from "@/constants/social-links";
-
-
+import { LinkCard } from "../components/link-card";
+import { ThemeToggle } from "../components/theme-toggle";
+import { heading, linkItems, name, socialLinks } from "@/constants/social-links";
+import Socials from "@/components/socials";
+import Image from "next/image";
 
 export default function Home() {
-
-  const links = socialLinks;
+  const links = linkItems;
 
   return (
-    <div className="min-h-screen  bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-900 dark:to-blue-900 py-12 px-4 sm:px-6 lg:px-8 transition-colors duration-300">
-      <ThemeToggle />
-      <div className="max-w-xl mx-auto">
+    <div className="min-h-screen flex flex-col justify-between pt-14 bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-900 dark:to-blue-900 py-8 px-4 sm:px-6 lg:px-8 transition-colors duration-300">
+      {/* Theme Toggle */}
+      <div className="absolute top-4 right-4 sm:top-6 sm:right-6">
+        <ThemeToggle />
+      </div>
+
+      {/* Main Content */}
+      <div className="flex flex-col items-center w-full max-w-4xl mx-auto gap-8">
+        {/* Profile Section */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-8"
+          transition={{ duration: 0.5 }}
+          className="text-center w-full"
         >
-          <div className="inline-flex justify-center mb-6">
-            <div className="p-4 bg-gradient-to-r rounded-full from-blue-500 to-purple-500 dark:from-blue-400 dark:to-purple-400  shadow-lg">
-              <LinkIcon className="w-14 h-14 text-white" />
+          {/* Profile Picture */}
+          <div className="inline-flex justify-center mb-4">
+            <div className="rounded-full border border-gray-400 dark:border-blue-500 shadow-lg">
+              <Image
+                src="/pfp.jpg"
+                alt="Profile Picture"
+                height={90}
+                width={90}
+                className="rounded-full"
+              />
             </div>
           </div>
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">{name}</h1>
-          <p className="text-gray-600 dark:text-gray-300">{heading}</p>
+          {/* Name and Heading */}
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-white sm:text-3xl">
+            {name}
+          </h1>
+          <p className="text-gray-600 dark:text-gray-300 sm:text-lg">{heading}</p>
         </motion.div>
 
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          className="space-y-3"
-        >
-          {links.map((link, index) => (
-            <LinkCard key={index} link={link} />
-          ))}
-        </motion.div>
       </div>
-      {/* <VercelAnalytics /> */}
+
+      {/* Links Section */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.2, duration: 0.5 }}
+        className="flex flex-col items-center w-full max-w-2xl space-y-3 px-4 sm:px-0 mx-auto"
+      >
+        {links.map((link, index) => (
+          <LinkCard key={index} link={link} />
+        ))}
+      </motion.div>
+
+      {/* Socials Section */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.4, duration: 0.5 }}
+        className="w-full max-w-4xl mx-auto mb-4"
+      >
+        <Socials />
+      </motion.div>
     </div>
   );
 }

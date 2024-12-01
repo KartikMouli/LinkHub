@@ -1,4 +1,6 @@
-import { LinkItem } from "@/types/link";
+import { Link } from "@/types/link";
+
+
 
 
 export const name = "@kartikmouli";
@@ -6,38 +8,32 @@ export const heading = "IITP CSE '24";
 
 export const socialLinks = [
     { platform: "LinkedIn", url: "https://www.linkedin.com/in/kartik-mouli/" },
+    { platform: "Github", url: "https://github.com/AtotheY/KartikMouli" },
     { platform: "Twitter", url: "https://x.com/kartikmouli" },
     { platform: "Mail", url: "mailto:kartikmouli156@gmail.com" },
     { platform: "Instagram", url: "https://instagram.com/KartikMouli" },
-    { platform: "Github", url: "https://github.com/AtotheY/KartikMouli" },
 ];
 
 
-export const items: LinkItem[] = [
+export const linkItems: Link[] = [
     {
-        type: "link",
-        title: "Porfolio",
-        url: "https://jb.gg/get_webstorm_now",
+        platform: "Resume",
+        url: "https://drive.google.com/file/d/16ebey3K6tIWcpgVi0Gc7zI3mYVpgdHxR/view?usp=sharing",
     },
     {
-        type: "link",
-        title: "Resume / CV",
-        url: "https://jb.gg/get_webstorm_now",
+        platform: "Portfolio",
+        url: "https://kartikmoulidev.vercel.app/",
+    },
+
+    {
+
+        platform: "Leetcode",
+        url: "https://leetcode.com/u/monchi02/",
     },
     {
-        type: "link",
-        title: "Projects",
-        url: "https://jb.gg/get_webstorm_now",
-    },
-    {
-        type: "link",
-        title: "Leetcode",
-        url: "https://jb.gg/get_webstorm_now",
-    },
-    {
-        type: "link",
-        title: "Codeforces",
-        url: "https://jb.gg/get_webstorm_now",
+
+        platform: "Codeforces",
+        url: "https://codeforces.com/profile/monchi_02",
     },
 ]
 
