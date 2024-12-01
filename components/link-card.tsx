@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+"use client"
+import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ExternalLink } from 'lucide-react';
 import { Link } from '@/types/link';

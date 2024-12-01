@@ -23,8 +23,7 @@ import {
     ArrowUpRight,
     ArrowDownRight,
 } from "lucide-react";
-import { Switch } from "@/components/ui/switch";
-import { Label } from "@/components/ui/label";
+
 import { Progress } from "@/components/ui/progress";
 import { getCountryFlag } from "@/utils/countryUtils";
 import { DateRangeSelector } from "@/components/date-range-selector";
@@ -54,7 +53,6 @@ export default function Dashboard() {
         null
     );
 
-    const [showVisits, setShowVisits] = useState(true);
     const router = useRouter();
     const supabase = createClient();
     const [dateRange, setDateRange] = useState({
@@ -119,7 +117,7 @@ export default function Dashboard() {
     return (
         <div className="min-h-screen w-full mx-auto p-4 bg-gray-100 text-gray-800 dark:bg-gray-100">
             <h1 className="text-3xl font-bold">Linktree Dashboard</h1>
-            <h5 className="mb-6">links.sistilli.dev</h5>
+            <h5 className="mb-6">kartikmouli</h5>
             <div className="mb-6 ">
                 <DateRangeSelector
                     startDate={dateRange.start}

@@ -1,10 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { LinkIcon } from "lucide-react";
 import { LinkCard } from "../components/link-card";
 import { ThemeToggle } from "../components/theme-toggle";
-import { heading, linkItems, name, socialLinks } from "@/constants/social-links";
+import { heading, linkItems, name } from "@/constants/social-links";
 import Socials from "@/components/socials";
 import Image from "next/image";
 

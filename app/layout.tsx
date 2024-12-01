@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { ThemeProvider } from "../components/theme-provider";
 
-import { Sora, Manrope } from 'next/font/google';
+import { Sora} from 'next/font/google';
 const sora = Sora({
   subsets: ['latin'], // Choose the character subsets you need
   weight: ['400', '700'], // Include the font weights you need
