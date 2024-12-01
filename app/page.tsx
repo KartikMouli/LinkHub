@@ -6,9 +6,26 @@ import { ThemeToggle } from "../components/theme-toggle";
 import { heading, linkItems, name } from "@/constants/social-links";
 import Socials from "@/components/socials";
 import Image from "next/image";
+import { useEffect } from "react";
+import { useLinksStore } from "@/store/uselinkstore";
 
 export default function Home() {
+
+  const { geoInfo, fetchGeoInfo, trackVisit, visitTracked } = useLinksStore();
+
+  useEffect(() => {
+    fetchGeoInfo();
+  }, []);
+
+  useEffect(() => {
+    if (geoInfo && !visitTracked) {
+      trackVisit();
+    }
+  }, [geoInfo, visitTracked]);
+
+
   const links = linkItems;
+
 
   return (
     <div className="min-h-screen flex flex-col justify-between pt-14 bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-900 dark:to-blue-900 py-8 px-4 sm:px-6 lg:px-8 transition-colors duration-300">

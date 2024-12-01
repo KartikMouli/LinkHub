@@ -1,11 +1,8 @@
 "use client"
-import React, { useEffect } from 'react';
+import React  from 'react';
 import { motion } from 'framer-motion';
 import { ExternalLink } from 'lucide-react';
 import { Link } from '@/types/link';
-
-
-
 import { TbBrandLeetcode } from "react-icons/tb";
 import { SiCodeforces } from "react-icons/si";
 import {
@@ -29,17 +26,7 @@ interface LinkCardProps {
 
 export const LinkCard: React.FC<LinkCardProps> = ({ link }) => {
 
-    const { geoInfo, fetchGeoInfo, trackVisit, visitTracked } = useLinksStore();
     const handleLinkClick = useLinksStore(state => state.handleLinkClick)
-
-    useEffect(() => {
-        fetchGeoInfo();
-    }, []);
-
-    useEffect(() => {
-        trackVisit();
-    }, [geoInfo, visitTracked]);
-
 
     const onLinkClick = async () => {
         window.open(link.url)
@@ -47,7 +34,7 @@ export const LinkCard: React.FC<LinkCardProps> = ({ link }) => {
     };
 
     const LinkIcons = Icons[link.platform] || ExternalLink;
-    
+
     return (
         <motion.div
             initial={{ opacity: 0, y: 20 }}
