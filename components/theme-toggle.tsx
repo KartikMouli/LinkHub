@@ -1,34 +1,23 @@
-"use client"
-import React, { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
-import { Moon, Sun } from 'lucide-react';
-import { useTheme } from 'next-themes';
+"use client";
 
+import { Button } from "@/components/ui/button";
+import { MoonIcon, SunIcon } from "lucide-react";
 
-export const ThemeToggle: React.FC = () => {
-    const { setTheme, resolvedTheme } = useTheme();
-    const [mounted, setMounted] = useState(false);
+import { useTheme } from "next-themes";
 
-    useEffect(() => {
-        setMounted(true);
-    }, []);
-
-    if (!mounted) {
-        return null;
-    }
+export function ThemeToggle() {
+    const { theme, setTheme } = useTheme();
 
     return (
-        <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => { setTheme(resolvedTheme === "dark" ? "light" : "dark"); }}
-            className="fixed top-4 right-4 p-3 rounded-full bg-white dark:bg-gray-800 shadow-lg"
+        <Button
+            variant="ghost"
+            type="button"
+            size="icon"
+            className="px-2"
+            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
         >
-            {resolvedTheme === "dark" ? (
-                <Sun className="w-5 h-5 text-yellow-500" />
-            ) : (
-                <Moon className="w-5 h-5 text-blue-500" />
-            )}
-        </motion.button>
+            <MoonIcon className="h-[1.2rem] w-[1.2rem] text-neutral-800 dark:hidden dark:text-orange-300" />
+            <SunIcon className="hidden h-[1.2rem] w-[1.2rem] text-neutral-800 dark:block dark:text-orange-300" />
+        </Button>
     );
-};
+}

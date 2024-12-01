@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { GeoInfo } from '../types/link';
+import { GeoInfo } from '../types/type';
 
 interface LinksStore {
     isLoading: boolean;

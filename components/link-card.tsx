@@ -1,8 +1,8 @@
 "use client"
-import React  from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { ExternalLink } from 'lucide-react';
-import { Link } from '@/types/link';
+import { Link } from '@/types/type';
 import { TbBrandLeetcode } from "react-icons/tb";
 import { SiCodeforces } from "react-icons/si";
 import {
@@ -10,6 +10,8 @@ import {
     FolderCode
 } from "lucide-react";
 import { useLinksStore } from '@/store/uselinkstore';
+import { FaLetterboxd } from "react-icons/fa6";
+
 
 
 const Icons: Record<string, React.ElementType> = {
@@ -17,6 +19,8 @@ const Icons: Record<string, React.ElementType> = {
     Portfolio: FolderCode,
     Leetcode: TbBrandLeetcode,
     Codeforces: SiCodeforces,
+    Letterboxd: FaLetterboxd,
+    
 };
 
 
@@ -46,7 +50,7 @@ export const LinkCard: React.FC<LinkCardProps> = ({ link }) => {
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 onClick={onLinkClick}
-                className="w-full p-3 md:p-4 bg-white dark:bg-gray-800 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 flex items-center justify-between group-hover:bg-gray-50 dark:group-hover:bg-gray-700"
+                className="w-full p-3  bg-white dark:bg-gray-800 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 flex items-center justify-between group-hover:bg-gray-50 dark:group-hover:bg-gray-700"
             >
                 <div className="flex items-center space-x-3">
                     <div className="p-2 bg-blue-100 dark:bg-blue-900 rounded-lg">

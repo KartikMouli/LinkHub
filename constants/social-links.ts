@@ -1,6 +1,4 @@
-import { Link } from "@/types/link";
-
-
+import { Link } from "@/types/type";
 
 
 export const name = "@kartikmouli";
@@ -12,6 +10,8 @@ export const socialLinks = [
     { platform: "Twitter", url: "https://x.com/kartikmouli" },
     { platform: "Mail", url: "mailto:kartikmouli156@gmail.com" },
     { platform: "Instagram", url: "https://instagram.com/KartikMouli" },
+    { platform: "Whatsapp", url: "https://wa.me/+919325648631" }
+
 ];
 
 
@@ -35,5 +35,9 @@ export const linkItems: Link[] = [
         platform: "Codeforces",
         url: "https://codeforces.com/profile/monchi_02",
     },
+    {
+        platform: "Letterboxd",
+        url: "https://letterboxd.com/monchi02/"
+    }
 ]
 
