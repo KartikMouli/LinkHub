@@ -99,6 +99,8 @@ export default function Dashboard() {
         return <div>Loading...</div>;
     }
 
+    console.log(analyticsData.clicks_by_link)
+
     const calculatePercentageChange = (current: number, previous: number) => {
         if (previous === 0) return 100;
         return ((current - previous) / previous) * 100;
@@ -245,10 +247,11 @@ export default function Dashboard() {
                                         key={index}
                                         className="text-sm flex justify-between items-center"
                                     >
-                                        <span className="font-medium">{item.link_id}</span>
+                                        <span className="font-medium max-w-xs overflow-hidden truncate">{item.link_id}</span>
                                         <span className="bg-blue-100 text-blue-800 px-2 py-1 rounded">
                                             {item.total_clicks}
                                         </span>
+                                        
                                     </li>
                                 ))}
                             </ul>
@@ -300,7 +303,7 @@ export default function Dashboard() {
                                         key={index}
                                         className="text-sm flex justify-between items-center"
                                     >
-                                        <span className="font-medium">{item.source}</span>
+                                        <span className="font-medium max-w-xs overflow-hidden truncate">{item.source}</span>
                                         <span className="bg-purple-100 text-purple-800 px-2 py-1 rounded">
                                             {item.total_views}
                                         </span>
@@ -310,7 +313,7 @@ export default function Dashboard() {
                         </ScrollArea>
                     </CardContent>
                 </Card>
-                
+
             </div>
         </div>
     );
