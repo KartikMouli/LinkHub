@@ -10,7 +10,7 @@ export const socialLinks = [
     { platform: "Twitter", url: "https://x.com/kartikmouli" },
     { platform: "Mail", url: "mailto:kartikmouli156@gmail.com" },
     { platform: "Instagram", url: "https://instagram.com/KartikMouli" },
-    { platform: "Whatsapp", url: "https://wa.me/+919325648631" }
+    { platform: "Whatsapp", url: "https://wa.me/919325648631" }
 
 ];
 
