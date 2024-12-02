@@ -10,16 +10,17 @@ import {
     DialogTrigger,
 } from "@/components/ui/dialog";
 
-import { EllipsisVertical } from "lucide-react";
+import { Ellipsis, EllipsisVertical } from "lucide-react";
 import { ShareButton } from "./share-button";
 import { SocialShareButtons } from "./social-share-buttons";
 
 
 interface LinkModalProps {
     link: { platform: string; url: string };
+    vertical?: boolean | false;
 }
 
-export default function LinkModal({ link }: LinkModalProps) {
+export default function LinkModal({ link, vertical }: LinkModalProps) {
     const [isCopied, setIsCopied] = useState(false);
 
     const handleCopy = () => {
@@ -30,7 +31,9 @@ export default function LinkModal({ link }: LinkModalProps) {
     return (
         <Dialog>
             <DialogTrigger asChild>
-                <EllipsisVertical className="h-4 w-4 hover:cursor-pointer" />
+                {
+                    vertical ? <EllipsisVertical className="h-4 w-4 hover:cursor-pointer" /> : <Ellipsis className="h-4 w-4 hover:cursor-pointer" />
+                }
             </DialogTrigger>
 
             <DialogContent className="sm:max-w-md">
