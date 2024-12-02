@@ -1,14 +1,13 @@
 "use client";
 
-import { Button, buttonVariants } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import {
     Tooltip,
     TooltipContent,
     TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { cn } from "@/lib/utils";
-import Link from "next/link";
+
 import { Dock, DockIcon } from "./ui/dock";
 import { ThemeToggle } from "./theme-toggle";
 import { socialLinks } from "@/constants/social-links";
@@ -62,14 +61,14 @@ export default function Navbar() {
                                         <Icon className="size-4 transition-all duration-300 text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-500" />
                                     </Button>
                                 </TooltipTrigger>
-                                <TooltipContent>
+                                <TooltipContent >
                                     <p>{platform}</p>
                                 </TooltipContent>
                             </Tooltip>
                         </DockIcon>
                     );
                 })}
-                <Separator orientation="vertical" className="h-full py-2" />
+                <Separator orientation="vertical" className="h-full bg-gradient-to-b from-blue-500/20 via-purple-500/20 to-blue-500/20" />
                 <DockIcon>
                     <Tooltip>
                         <TooltipTrigger asChild>
